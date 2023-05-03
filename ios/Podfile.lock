@@ -303,9 +303,9 @@ PODS:
     - RCTTypeSafety
     - React-Core
     - ReactCommon/turbomodule/core
-  - react-native-track-player (3.2.0):
+  - react-native-track-player (4.0.0-rc04):
     - React-Core
-    - SwiftAudioEx (= 0.15.3)
+    - SwiftAudioEx (= 1.0.0-rc.3)
   - React-perflogger (0.71.7)
   - React-RCTActionSheet (0.71.7):
     - React-Core/RCTActionSheetHeaders (= 0.71.7)
@@ -393,7 +393,7 @@ PODS:
   - RNSVG (13.9.0):
     - React-Core
   - SocketRocket (0.6.0)
-  - SwiftAudioEx (0.15.3)
+  - SwiftAudioEx (1.0.0-rc.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -590,7 +590,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 9885f6f94d231b95a739ef7bb50536fb87ce7539
   React-logger: 3f8ebad1be1bf3299d1ab6d7f971802d7395c7ef
   react-native-safe-area-context: f5549f36508b1b7497434baa0cd97d7e470920d4
-  react-native-track-player: 0c26d981b5097910486cbbeb6d8f5352d41be069
+  react-native-track-player: 744094fceed7e67226cb5f406f3481bbc126f5dc
   React-perflogger: 2d505bbe298e3b7bacdd9e542b15535be07220f6
   React-RCTActionSheet: 0e96e4560bd733c9b37efbf68f5b1a47615892fb
   React-RCTAnimation: fd138e26f120371c87e406745a27535e2c8a04ef
@@ -607,7 +607,7 @@ SPEC CHECKSUMS:
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
   RNSVG: 53c661b76829783cdaf9b7a57258f3d3b4c28315
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
-  SwiftAudioEx: 83eabba2940924fc1c0d5cb0896049921365229c
+  SwiftAudioEx: f0fe8358a56794aab2df848e14b8e005e6743f7c
   Yoga: d56980c8914db0b51692f55533409e844b66133c
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

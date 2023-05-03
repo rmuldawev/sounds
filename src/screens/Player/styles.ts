@@ -33,11 +33,12 @@ const styles = StyleSheet.create({
         fontWeight:'500'
     },
     buttons:{
-        height:60,
         width:'100%',
         backgroundColor:'grey',
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        marginTop:50
+        
     },
     image:{
         height:350,
@@ -53,6 +54,13 @@ const styles = StyleSheet.create({
         backgroundColor:'#ffffff',
         borderRadius:60,
     },
+    stopBnt:{
+        height:60,
+        width:60,
+        backgroundColor:'red',
+        alignItems:'center',
+        justifyContent:'center'
+    }
 })
 
 export default styles

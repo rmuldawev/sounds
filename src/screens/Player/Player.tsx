@@ -1,26 +1,72 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Pressable, Text, View} from 'react-native';
-import styles from './styles';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import ChevronLeft from '../../assets/icons/ChevronLeft';
 import {useNavigation} from '@react-navigation/native';
 import {AppStackScreenProps} from '../../navigator/AppNavigator';
-import WildAnimalScreen from '../WildAnimalScreen/WildAnimalScreen';
+//assets
 import PrevTrack from '../../assets/icons/PrevTrack';
 import Play from '../../assets/icons/Play';
+import ChevronLeft from '../../assets/icons/ChevronLeft';
+//style
+import styles from './styles';
 
-// import items from '../WildAnimalScreen/WildAnimalScreen';
+import TrackPlayer, {
+  Capability,
+  Event,
+  RepeatMode,
+  State,
+  usePlaybackState,
+  useProgress,
+  useTrackPlayerEvents,
+} from 'react-native-track-player';
 
-const TrackPlayer = ({route}: any) => {
+const MusicPlayer = ({route}: any) => {
+  const playebackState = usePlaybackState();
   const {bottom, top} = useSafeAreaInsets();
   const paddingStyle = {paddingTop: top + 15, paddingBottom: bottom + 15};
   const navigation = useNavigation<AppStackScreenProps['navigation']>();
   const {items} = route.params;
-  console.log(items);
+  // const [isPlaying, setIsPlaying] = useState(false);
+  console.log('звук', [items]);
+
+  // const playSound = async () => {
+  //   await TrackPlayer.setupPlayer();
+  //   const track = await TrackPlayer.getActiveTrack(items.id);
+  //   if (track) {
+  //     return;
+  //   }
+  //   await TrackPlayer.add(items);
+  //   await TrackPlayer.play();
+  // };
+
+  useEffect(() => {
+    async function setup() {
+      await TrackPlayer.setupPlayer();
+    }
+    setup();
+  }, []);
+
+  const playSound = async () => {
+    await TrackPlayer.add(items);
+    await TrackPlayer.play();
+  };
+
+  const pauseTrack = async () => {
+    await TrackPlayer.pause();
+    // setIsPlaying(false);
+  };
+
+  const stopTrack = async () => {
+    await TrackPlayer.stop();
+  };
+  const removeTrack = async () => {
+    navigation.goBack();
+    await TrackPlayer.reset();
+  };
 
   return (
     <View style={[paddingStyle, styles.main]}>
-      <Pressable style={styles.title} onPress={() => navigation.goBack()}>
+      <Pressable style={styles.title} onPress={removeTrack}>
         <ChevronLeft />
         <Text style={styles.textTitle}>Дикие животные</Text>
       </Pressable>
@@ -38,9 +84,12 @@ const TrackPlayer = ({route}: any) => {
           <View style={styles.prevTrack}>
             <PrevTrack />
           </View>
-          <View>
+          <Pressable style={styles.stopBnt} onPress={stopTrack}>
+            <Text>Stop</Text>
+          </Pressable>
+          <Pressable style={{backgroundColor: 'red'}} onPress={playSound}>
             <Play />
-          </View>
+          </Pressable>
           <View style={styles.nextTrack}>
             <PrevTrack />
           </View>
@@ -50,4 +99,4 @@ const TrackPlayer = ({route}: any) => {
   );
 };
 
-export default TrackPlayer;
+export default MusicPlayer;

@@ -8712,9 +8712,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-track-player@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "react-native-track-player@npm:3.2.0"
+"react-native-track-player@npm:next":
+  version: 4.0.0-rc04
+  resolution: "react-native-track-player@npm:4.0.0-rc04"
   peerDependencies:
     react: ">=16.8.6"
     react-native: ">=0.60.0-rc.2"
@@ -8722,7 +8722,7 @@ __metadata:
   peerDependenciesMeta:
     react-native-windows:
       optional: true
-  checksum: df64fdc7a25632ae26a35983dbeb906b7875fd97d1eea804dd1fb80b6f0033d3a81e37885c6201e4a02e6263e1273b1f44c6d6fb0e19560a5f62c98e7c510b9d
+  checksum: d3be19d700527625960fbb96dd51a0ae1b5790e8fba3b6abd32b2b4f896b3751a4c13e9061b8856fee9bd5b1f4d783fc3240272fcc3908025b19e120f745f7d2
   languageName: node
   linkType: hard
 
@@ -9466,7 +9466,7 @@ __metadata:
     react-native-screens: ^3.20.0
     react-native-svg: ^13.9.0
     react-native-svg-transformer: ^1.0.0
-    react-native-track-player: ^3.2.0
+    react-native-track-player: next
     react-test-renderer: 18.2.0
     typescript: 4.8.4
   languageName: unknown
