@@ -4,64 +4,78 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {AppStackScreenProps} from '../../navigator/AppNavigator';
 //assets
-import PrevTrack from '../../assets/icons/PrevTrack';
-import Play from '../../assets/icons/Play';
 import ChevronLeft from '../../assets/icons/ChevronLeft';
 //style
 import styles from './styles';
 
-import TrackPlayer, {
-  Capability,
-  Event,
-  RepeatMode,
-  State,
-  usePlaybackState,
-  useProgress,
-  useTrackPlayerEvents,
-} from 'react-native-track-player';
+import TrackPlayer, {Repe} from 'react-native-track-player';
+import PlayIcon from '../../assets/icons/playIcon';
+import SkipBack from '../../assets/icons/SkipBack';
+import Skip from '../../assets/icons/Skip';
+import Stop from '../../assets/icons/Stop';
+import data from '../WildAnimalScreen/data';
+import Shuffle from '../../assets/icons/Shuffle';
+import ToggleImage from '../../assets/icons/ToggleImage';
+import Repeat from '../../assets/icons/Repeat';
 
 const MusicPlayer = ({route}: any) => {
-  const playebackState = usePlaybackState();
+  const [isPlaying, setIsPlaying] = useState(false);
   const {bottom, top} = useSafeAreaInsets();
   const paddingStyle = {paddingTop: top + 15, paddingBottom: bottom + 15};
   const navigation = useNavigation<AppStackScreenProps['navigation']>();
-  const {items} = route.params;
-  // const [isPlaying, setIsPlaying] = useState(false);
-  console.log('звук', [items]);
-
-  // const playSound = async () => {
-  //   await TrackPlayer.setupPlayer();
-  //   const track = await TrackPlayer.getActiveTrack(items.id);
-  //   if (track) {
-  //     return;
-  //   }
-  //   await TrackPlayer.add(items);
-  //   await TrackPlayer.play();
-  // };
-
+  const [isPressed, setIsPressed] = useState<boolean>(false);
+  const [datas, setDatas] = useState(route.params.id);
+  const items = [...data[0], ...data[1]];
+  console.log('items', items);
   useEffect(() => {
-    async function setup() {
-      await TrackPlayer.setupPlayer();
+    function setup() {
+      TrackPlayer.setupPlayer();
     }
     setup();
   }, []);
 
-  const playSound = async () => {
-    await TrackPlayer.add(items);
-    await TrackPlayer.play();
+  const playSound = () => {
+    TrackPlayer.add(items[datas]);
+    TrackPlayer.play();
+    setIsPlaying(true);
   };
 
-  const pauseTrack = async () => {
-    await TrackPlayer.pause();
-    // setIsPlaying(false);
+  const stopTrack = () => {
+    TrackPlayer.stop();
+    setIsPlaying(false);
   };
 
-  const stopTrack = async () => {
-    await TrackPlayer.stop();
-  };
-  const removeTrack = async () => {
+  const removeTrack = () => {
     navigation.goBack();
-    await TrackPlayer.reset();
+    TrackPlayer.reset();
+  };
+
+  // console.log('длина массива', data[0].length);
+  // console.log('id', datas);
+
+  const skipTrack = () => {
+    if (datas == Number(items.length - 1)) {
+      null;
+    } else {
+      const change = datas + 1;
+      TrackPlayer.reset();
+      TrackPlayer.skipToNext();
+      setIsPlaying(false);
+      setDatas(change);
+      TrackPlayer.play();
+    }
+  };
+
+  const prev = () => {
+    if (datas !== 0) {
+      const change = datas - 1;
+      TrackPlayer.reset();
+      TrackPlayer.skipToPrevious();
+      setIsPlaying(false);
+      setDatas(change);
+    } else {
+      null;
+    }
   };
 
   return (
@@ -71,27 +85,48 @@ const MusicPlayer = ({route}: any) => {
         <Text style={styles.textTitle}>Дикие животные</Text>
       </Pressable>
       <View style={styles.container}>
-        <View style={styles.albumImage}>
-          {[items].map((e, index) => {
-            return (
-              <View key={index}>
-                <Image style={styles.image} source={e.image} />
-              </View>
-            );
-          })}
-        </View>
-        <View style={styles.buttons}>
-          <View style={styles.prevTrack}>
-            <PrevTrack />
+        {!isPressed ? (
+          <Pressable
+            onPress={() => setIsPressed(true)}
+            style={styles.albumImage}>
+            <Image
+              style={styles.image}
+              source={require('../../assets/images/tapIcon.png')}
+            />
+          </Pressable>
+        ) : (
+          <View style={styles.albumImage}>
+            <View>
+              <Image style={styles.image} source={items[datas].image} />
+            </View>
           </View>
-          <Pressable style={styles.stopBnt} onPress={stopTrack}>
-            <Text>Stop</Text>
-          </Pressable>
-          <Pressable style={{backgroundColor: 'red'}} onPress={playSound}>
-            <Play />
-          </Pressable>
-          <View style={styles.nextTrack}>
-            <PrevTrack />
+        )}
+        <View style={styles.buttons}>
+          <View style={styles.column1}>
+            <Pressable onPress={prev} style={styles.prevTrack}>
+              <SkipBack />
+            </Pressable>
+            <Pressable onPress={() => setIsPressed(prev => !prev)}>
+              <ToggleImage />
+            </Pressable>
+          </View>
+          <View style={styles.column2}>
+            <Pressable
+              style={styles.play}
+              onPress={isPlaying ? stopTrack : playSound}>
+              {isPlaying ? <Stop /> : <PlayIcon />}
+            </Pressable>
+            <Pressable>
+              <Repeat />
+            </Pressable>
+          </View>
+          <View style={styles.column3}>
+            <Pressable onPress={skipTrack}>
+              <Skip />
+            </Pressable>
+            <Pressable>
+              <Shuffle />
+            </Pressable>
           </View>
         </View>
       </View>

@@ -12,7 +12,7 @@ function ChevronLeft({props}: any) {
       {...props}>
       <Path
         d="M15 18l-6-6 6-6"
-        stroke="#ed766f"
+        stroke="#ffffff"
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"

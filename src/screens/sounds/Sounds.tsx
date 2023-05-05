@@ -18,7 +18,7 @@ const Sounds = () => {
         <Pressable onPress={() => navigation.navigate('WildAnimalScreen')}>
           <WildAnamals />
         </Pressable>
-        <Pressable>
+        <Pressable onPress={() => navigation.navigate('PetsScreen')}>
           <Pets />
         </Pressable>
       </View>

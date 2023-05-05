@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         textAlign:"center",
         letterSpacing:1,
         color:'white',
-        marginBottom:10
+        marginBottom:30
     },
 })
 

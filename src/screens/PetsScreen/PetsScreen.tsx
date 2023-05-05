@@ -1,15 +1,15 @@
 import React from 'react';
 import {Image, Pressable, ScrollView, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import styles from './styles';
 import ChevronLeft from '../../assets/icons/ChevronLeft';
 import {useNavigation} from '@react-navigation/native';
 import {AppStackScreenProps} from '../../navigator/AppNavigator';
 import data from '../../screens/WildAnimalScreen/data';
+import styles from './styles';
 
-const WildAnimalScreen = () => {
+const PetsScreen = () => {
   const {bottom, top} = useSafeAreaInsets();
-  const paddingStyle = {paddingTop: top + 10, paddingBottom: bottom};
+  const paddingStyle = {paddingTop: top, paddingBottom: bottom};
   const navigation = useNavigation<AppStackScreenProps['navigation']>();
 
   console.log('data', data);
@@ -25,9 +25,9 @@ const WildAnimalScreen = () => {
           <ChevronLeft />
           <Text style={styles.backText}>Назад</Text>
         </Pressable>
-        <Text style={styles.text}>Дикие животные</Text>
+        <Text style={styles.text}>Домашние животные</Text>
         <View style={styles.images}>
-          {data[0].map((e, index) => (
+          {data[1].map((e, index) => (
             <Pressable
               style={styles.item}
               key={index}
@@ -43,4 +43,4 @@ const WildAnimalScreen = () => {
   );
 };
 
-export default WildAnimalScreen;
+export default PetsScreen;
