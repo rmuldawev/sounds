@@ -3,13 +3,14 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
+        flexGrow:1,
         backgroundColor:'#a3ccf5',
         paddingHorizontal:12,
     },
     animals:{
         flexDirection:'row',
         justifyContent:'space-between',
+        flexWrap:'wrap',
     },
     text:{
         fontFamily:'Arial',

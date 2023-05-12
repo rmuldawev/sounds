@@ -5,15 +5,13 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import WildAnimalScreen from '../screens/WildAnimalScreen/WildAnimalScreen';
 import TrackPlayer from '../screens/Player/Player';
-import PetsScreen from '../screens/PetsScreen/PetsScreen';
+import CatalogScreen from '../screens/CatalogScreen/CatalogScreen';
 
 export type MainStackParamList = {
   TrackPlayer: {};
-  WildAnimalScreen: {items: object[]};
-  Sounds: undefined;
-  PetsScreen: {items: object[]};
+  CatalogScreen: any;
+  Sounds: {data: object[]} | undefined;
 };
 export type AppStackScreenProps = NativeStackScreenProps<
   MainStackParamList,
@@ -33,18 +31,13 @@ const AppNavigator = () => {
             options={{...noHeaderStyle}}
           />
           <Stack.Screen
-            name="WildAnimalScreen"
-            component={WildAnimalScreen}
+            name="CatalogScreen"
+            component={CatalogScreen}
             options={{...noHeaderStyle}}
           />
           <Stack.Screen
             name="TrackPlayer"
             component={TrackPlayer}
-            options={{...noHeaderStyle}}
-          />
-          <Stack.Screen
-            name="PetsScreen"
-            component={PetsScreen}
             options={{...noHeaderStyle}}
           />
         </Stack.Group>

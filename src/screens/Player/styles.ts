@@ -29,11 +29,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+    marginLeft:10
   },
   textTitle: {
     fontSize: 16,
     fontWeight: '500',
     color: '#ffffff',
+
   },
   buttons: {
     width: '100%',
@@ -51,25 +53,17 @@ const styles = StyleSheet.create({
     height: 200,
     width: 300,
   },
-  // skip:{
-  //     // backgroundColor:'#a3ccf5',
-  //     // alignItems:'center',
-  //     // justifyContent:'center'
-  // },
   prevTrack: {
-    // backgroundColor:'#a3ccf5',
     alignItems: 'center',
     justifyContent: 'center',
   },
   stopBnt: {
     height: 60,
     width: 60,
-    // backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
   },
   play: {
-    // backgroundColor:'#a3ccf5',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -88,6 +82,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     height:110
+  },
+  name:{
+    alignSelf:'center',
+    fontSize: 20,
+    fontWeight: '500',
+    color: '#a3ccf5',
+
   },
 });
 

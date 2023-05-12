@@ -7,7 +7,6 @@ const ToggleImage = (props: SvgProps) => {
   const height = 28;
   return (
     <Svg
-      xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
       fill="none"
@@ -15,7 +14,6 @@ const ToggleImage = (props: SvgProps) => {
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}
-      className="feather feather-image"
       viewBox="-2.5 0 40 26"
       {...props}>
       <Rect width={28} height={18} x={3} y={3} rx={2} ry={2} />

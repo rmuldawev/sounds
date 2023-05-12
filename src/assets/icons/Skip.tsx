@@ -2,8 +2,8 @@ import * as React from 'react';
 import Svg, {SvgProps, Path} from 'react-native-svg';
 const Skip = (props: SvgProps) => (
   <Svg
-    width={54}
-    height={54}
+    width={48}
+    height={48}
     fill="none"
     stroke="#ffffff"
     strokeLinecap="round"

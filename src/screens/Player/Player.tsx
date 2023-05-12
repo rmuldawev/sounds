@@ -3,20 +3,23 @@ import {Image, Pressable, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {AppStackScreenProps} from '../../navigator/AppNavigator';
+import TrackPlayer, {RepeatMode} from 'react-native-track-player';
 //assets
 import ChevronLeft from '../../assets/icons/ChevronLeft';
 //style
 import styles from './styles';
 
-import TrackPlayer, {Repe} from 'react-native-track-player';
+//assets
 import PlayIcon from '../../assets/icons/playIcon';
 import SkipBack from '../../assets/icons/SkipBack';
 import Skip from '../../assets/icons/Skip';
 import Stop from '../../assets/icons/Stop';
-import data from '../WildAnimalScreen/data';
-import Shuffle from '../../assets/icons/Shuffle';
 import ToggleImage from '../../assets/icons/ToggleImage';
-import Repeat from '../../assets/icons/Repeat';
+import RepeatOff from '../../assets/icons/RepeatOff';
+import RepeatOn from '../../assets/icons/RepeatOn';
+import ShuffleOff from '../../assets/icons/ShuffleOff';
+import ShuffleOn from '../../assets/icons/ShuffleOn';
+import data from '../CatalogScreen/data';
 
 const MusicPlayer = ({route}: any) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -24,9 +27,13 @@ const MusicPlayer = ({route}: any) => {
   const paddingStyle = {paddingTop: top + 15, paddingBottom: bottom + 15};
   const navigation = useNavigation<AppStackScreenProps['navigation']>();
   const [isPressed, setIsPressed] = useState<boolean>(false);
-  const [datas, setDatas] = useState(route.params.id);
-  const items = [...data[0], ...data[1]];
-  console.log('items', items);
+  const [currentID, setCurrentID] = useState(route.params.currentID);
+  const [repeated, setRepeated] = useState<boolean>(false);
+  const [items, setItems] = useState(route.params.data);
+  const [shuffleItems, setShuffleItems] = useState<boolean>(false);
+  const shuffleData = [...data[0], ...data[1], ...data[2]];
+  console.log('currentID', items[currentID]);
+  // console.log('items', items);
   useEffect(() => {
     function setup() {
       TrackPlayer.setupPlayer();
@@ -35,14 +42,14 @@ const MusicPlayer = ({route}: any) => {
   }, []);
 
   const playSound = () => {
-    TrackPlayer.add(items[datas]);
+    TrackPlayer.add(items[currentID]);
     TrackPlayer.play();
-    setIsPlaying(true);
+    setIsPlaying(prev => !prev);
   };
 
   const stopTrack = () => {
     TrackPlayer.stop();
-    setIsPlaying(false);
+    setIsPlaying(prev => !prev);
   };
 
   const removeTrack = () => {
@@ -50,39 +57,65 @@ const MusicPlayer = ({route}: any) => {
     TrackPlayer.reset();
   };
 
-  // console.log('длина массива', data[0].length);
-  // console.log('id', datas);
-
   const skipTrack = () => {
-    if (datas == Number(items.length - 1)) {
+    if (currentID === items.length - 1) {
       null;
     } else {
-      const change = datas + 1;
+      const change = currentID + 1;
       TrackPlayer.reset();
       TrackPlayer.skipToNext();
       setIsPlaying(false);
-      setDatas(change);
+      setCurrentID(change);
       TrackPlayer.play();
     }
   };
 
   const prev = () => {
-    if (datas !== 0) {
-      const change = datas - 1;
+    if (currentID > 0) {
+      const change = currentID - 1;
       TrackPlayer.reset();
       TrackPlayer.skipToPrevious();
       setIsPlaying(false);
-      setDatas(change);
+      setCurrentID(change);
     } else {
       null;
     }
+  };
+
+  const repeat = () => {
+    TrackPlayer.setRepeatMode(RepeatMode.Track);
+    setRepeated(prev => !prev);
+  };
+
+  const offRepeat = () => {
+    TrackPlayer.setRepeatMode(RepeatMode.Off);
+    setRepeated(prev => !prev);
+  };
+
+  let shuffled = shuffleData
+    .map(value => ({value, sort: Math.random()}))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({value}) => value);
+
+  const onShuffle = () => {
+    setItems(shuffled);
+    setShuffleItems(true);
+    console.log('вкл');
+    console.log('items', items);
+  };
+
+  const offShuffle = () => {
+    setItems(route.params.data);
+    setShuffleItems(false);
+    console.log('выкл');
+    console.log('items', items);
   };
 
   return (
     <View style={[paddingStyle, styles.main]}>
       <Pressable style={styles.title} onPress={removeTrack}>
         <ChevronLeft />
-        <Text style={styles.textTitle}>Дикие животные</Text>
+        <Text style={styles.textTitle}>Назад</Text>
       </Pressable>
       <View style={styles.container}>
         {!isPressed ? (
@@ -97,7 +130,8 @@ const MusicPlayer = ({route}: any) => {
         ) : (
           <View style={styles.albumImage}>
             <View>
-              <Image style={styles.image} source={items[datas].image} />
+              <Image style={styles.image} source={items[currentID].image} />
+              <Text style={styles.name}>{items[currentID].name}</Text>
             </View>
           </View>
         )}
@@ -116,16 +150,16 @@ const MusicPlayer = ({route}: any) => {
               onPress={isPlaying ? stopTrack : playSound}>
               {isPlaying ? <Stop /> : <PlayIcon />}
             </Pressable>
-            <Pressable>
-              <Repeat />
+            <Pressable onPress={repeated ? offRepeat : repeat}>
+              {repeated ? <RepeatOn /> : <RepeatOff />}
             </Pressable>
           </View>
           <View style={styles.column3}>
             <Pressable onPress={skipTrack}>
               <Skip />
             </Pressable>
-            <Pressable>
-              <Shuffle />
+            <Pressable onPress={shuffleItems ? offShuffle : onShuffle}>
+              {shuffleItems ? <ShuffleOn /> : <ShuffleOff />}
             </Pressable>
           </View>
         </View>

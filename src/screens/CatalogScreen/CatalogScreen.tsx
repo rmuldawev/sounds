@@ -1,18 +1,16 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Image, Pressable, ScrollView, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import styles from './styles';
 import ChevronLeft from '../../assets/icons/ChevronLeft';
 import {useNavigation} from '@react-navigation/native';
 import {AppStackScreenProps} from '../../navigator/AppNavigator';
-import data from '../../screens/WildAnimalScreen/data';
 
-const WildAnimalScreen = () => {
+const CatalogScreen = ({route}: any) => {
   const {bottom, top} = useSafeAreaInsets();
   const paddingStyle = {paddingTop: top + 10, paddingBottom: bottom};
   const navigation = useNavigation<AppStackScreenProps['navigation']>();
-
-  console.log('data', data);
+  const {data}: any = route.params;
 
   return (
     <View style={{flex: 1, backgroundColor: '#a3ccf5'}}>
@@ -25,13 +23,18 @@ const WildAnimalScreen = () => {
           <ChevronLeft />
           <Text style={styles.backText}>Назад</Text>
         </Pressable>
-        <Text style={styles.text}>Дикие животные</Text>
+        <Text style={styles.text}>{data.map((e: any) => e.title)}</Text>
         <View style={styles.images}>
-          {data[0].map((e, index) => (
+          {data.map((e: any, index: number) => (
             <Pressable
               style={styles.item}
               key={index}
-              onPress={() => navigation.navigate('TrackPlayer', {id: e.id})}>
+              onPress={() =>
+                navigation.navigate('TrackPlayer', {
+                  currentID: index,
+                  data: data,
+                })
+              }>
               <View>
                 <Image style={styles.image} source={e.image} />
               </View>
@@ -43,4 +46,4 @@ const WildAnimalScreen = () => {
   );
 };
 
-export default WildAnimalScreen;
+export default CatalogScreen;

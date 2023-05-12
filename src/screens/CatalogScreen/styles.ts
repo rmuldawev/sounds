@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
         textAlign:"center",
         letterSpacing:1,
         color:'white',
-        marginBottom:20
+        marginBottom:20,
+        marginTop:25
     },
     backIcon:{
         flexDirection:'row',
