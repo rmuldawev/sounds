@@ -3,15 +3,15 @@ const data = [
     {
       id: 0,
       title: 'Дикие животные',
-      name: 'Тигр',
-      image: require('../../assets/images/tigerIcon.png'),
-      url: require('../../assets/sounds/tigerSound.mp3'),
-    },
-    {
-      id: 1,
       image: require('../../assets/images/litle_lion.png'),
       url: require('../../assets/sounds/lion_sound.mp3'),
       name: 'Лев',
+    },
+    {
+      id: 1,
+      name: 'Тигр',
+      image: require('../../assets/images/tigerIcon.png'),
+      url: require('../../assets/sounds/tigerSound.mp3'),
     },
     {
       id: 2,
@@ -102,6 +102,57 @@ const data = [
       image: require('../../assets/images/musicIntruments/piano.png'),
       url: require('../../assets/sounds/musInstrSounds/pianoSound.mp3'),
       name: 'Рояль',
+    },
+  ],
+  [
+    {
+      id: 16,
+      image: require('../../assets/images/street/policeCar.png'),
+      url: require('../../assets/sounds/musInstrSounds/pianoSound.mp3'),
+      name: 'Полицейская машина',
+      title: 'На улице',
+    },
+    {
+      id: 17,
+      image: require('../../assets/images/street/ambulance.png'),
+      url: require('../../assets/sounds/musInstrSounds/pianoSound.mp3'),
+      name: 'Скорая помощь',
+    },
+    {
+      id: 18,
+      image: require('../../assets/images/street/motorcycle.png'),
+      url: require('../../assets/sounds/musInstrSounds/pianoSound.mp3'),
+      name: 'Мотоцикл',
+    },
+    {
+      id: 19,
+      image: require('../../assets/images/street/airplane.png'),
+      url: require('../../assets/sounds/musInstrSounds/pianoSound.mp3'),
+      name: 'Самолет',
+    },
+    {
+      id: 20,
+      image: require('../../assets/images/street/copter.png'),
+      url: require('../../assets/sounds/musInstrSounds/pianoSound.mp3'),
+      name: 'Вертолёт',
+    },
+    {
+      id: 21,
+      image: require('../../assets/images/street/train.png'),
+      url: require('../../assets/sounds/musInstrSounds/pianoSound.mp3'),
+      name: 'Поезд',
+    },
+    {
+      id: 22,
+      image: require('../../assets/images/street/rain.png'),
+      url: require('../../assets/sounds/musInstrSounds/pianoSound.mp3'),
+      name: 'Дождь',
+    },
+    {
+      id: 23,
+      image: require('../../assets/images/street/snow.png'),
+      url: require('../../assets/sounds/musInstrSounds/pianoSound.mp3'),
+      name: 'Снег',
     },
   ],
 ];

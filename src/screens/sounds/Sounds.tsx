@@ -1,21 +1,18 @@
 import React from 'react';
 import {Pressable, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {AppStackScreenProps} from '../../navigator/AppNavigator';
+//components
 import data from '../CatalogScreen/data';
 import Category from '../../components/Category/Category';
+//styles
+import styles from './styles';
 
 const Sounds = () => {
   const {bottom, top} = useSafeAreaInsets();
   const paddingStyle = {paddingTop: top + 15, paddingBottom: bottom + 15};
   const navigation = useNavigation<AppStackScreenProps['navigation']>();
-
-  console.log(
-    '111111',
-    [data].map(e => e),
-  );
 
   return (
     <View style={[styles.container, paddingStyle]}>

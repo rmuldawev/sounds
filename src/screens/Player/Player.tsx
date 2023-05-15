@@ -20,20 +20,24 @@ import RepeatOn from '../../assets/icons/RepeatOn';
 import ShuffleOff from '../../assets/icons/ShuffleOff';
 import ShuffleOn from '../../assets/icons/ShuffleOn';
 import data from '../CatalogScreen/data';
+import {useAppDispatch, useAppSelector} from '../../store';
+import {selectCurrentNote, setToggleState} from '../../store/ShowSlice';
 
 const MusicPlayer = ({route}: any) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const {bottom, top} = useSafeAreaInsets();
   const paddingStyle = {paddingTop: top + 15, paddingBottom: bottom + 15};
   const navigation = useNavigation<AppStackScreenProps['navigation']>();
-  const [isPressed, setIsPressed] = useState<boolean>(false);
   const [currentID, setCurrentID] = useState(route.params.currentID);
   const [repeated, setRepeated] = useState<boolean>(false);
   const [items, setItems] = useState(route.params.data);
   const [shuffleItems, setShuffleItems] = useState<boolean>(false);
   const shuffleData = [...data[0], ...data[1], ...data[2]];
-  console.log('currentID', items[currentID]);
-  // console.log('items', items);
+
+  const isLoading = useAppSelector(selectCurrentNote);
+  console.log('isLoading', isLoading);
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     function setup() {
       TrackPlayer.setupPlayer();
@@ -100,15 +104,11 @@ const MusicPlayer = ({route}: any) => {
   const onShuffle = () => {
     setItems(shuffled);
     setShuffleItems(true);
-    console.log('вкл');
-    console.log('items', items);
   };
 
   const offShuffle = () => {
     setItems(route.params.data);
     setShuffleItems(false);
-    console.log('выкл');
-    console.log('items', items);
   };
 
   return (
@@ -118,9 +118,9 @@ const MusicPlayer = ({route}: any) => {
         <Text style={styles.textTitle}>Назад</Text>
       </Pressable>
       <View style={styles.container}>
-        {!isPressed ? (
+        {!isLoading ? (
           <Pressable
-            onPress={() => setIsPressed(true)}
+            onPress={() => dispatch(setToggleState())}
             style={styles.albumImage}>
             <Image
               style={styles.image}
@@ -140,7 +140,7 @@ const MusicPlayer = ({route}: any) => {
             <Pressable onPress={prev} style={styles.prevTrack}>
               <SkipBack />
             </Pressable>
-            <Pressable onPress={() => setIsPressed(prev => !prev)}>
+            <Pressable onPress={() => dispatch(setToggleState())}>
               <ToggleImage />
             </Pressable>
           </View>
