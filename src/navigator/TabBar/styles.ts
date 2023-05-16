@@ -14,10 +14,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 5,
     borderTopWidth: 1,
-    paddingHorizontal: 5,
+    paddingHorizontal: 20,
+
   },
   TabBarTextStyle: {
-    fontSize: 10,
+    fontSize: 12,
     marginTop: 3,
     letterSpacing: 0.16,
     lineHeight: 13,
@@ -25,8 +26,8 @@ const styles = StyleSheet.create({
   tab: {
     width: spaces.windowWidth / 5.25,
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    height: 35,
+    height: 40,
+    // backgroundColor:'red'
   },
 })
 

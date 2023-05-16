@@ -4,6 +4,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Sounds from '../screens/sounds/Sounds';
 import Faq from '../screens/FAQ/Faq';
 import Settings from '../screens/Settings/Settings';
+import Tabbar from './TabBar/TabBar';
+import styles from './TabBar/styles';
 
 const Tab = createBottomTabNavigator();
 const TabNavigator = () => {
@@ -11,7 +13,10 @@ const TabNavigator = () => {
   const paddingStyle = {paddingTop: top + 15, paddingBottom: bottom + 15};
   const noHeaderStyle = {headerShown: false};
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBar={props => (
+        <Tabbar {...props} style={[styles.containerWindow, paddingStyle]} />
+      )}>
       <Tab.Screen
         name="Sounds"
         component={Sounds}
@@ -19,7 +24,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen name="FAQ" component={Faq} options={{...noHeaderStyle}} />
       <Tab.Screen
-        name="Настройки"
+        name="Settings"
         component={Settings}
         options={{...noHeaderStyle}}
       />

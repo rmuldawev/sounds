@@ -12,6 +12,8 @@ export type MainStackParamList = {
   TrackPlayer: {};
   CatalogScreen: any;
   Sounds: {data: object[]} | undefined;
+  FAQ: undefined;
+  Settings: undefined;
 };
 export type AppStackScreenProps = NativeStackScreenProps<
   MainStackParamList,

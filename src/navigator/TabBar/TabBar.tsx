@@ -3,6 +3,7 @@ import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 //styles
 import styles from './styles';
+import TabBarIcons from '../../TabBarIcons';
 const Tabbar = ({state, navigation, descriptors}: any) => {
   const {bottom} = useSafeAreaInsets();
   const bottomStyle = {paddingBottom: bottom};
@@ -48,7 +49,29 @@ const Tabbar = ({state, navigation, descriptors}: any) => {
             onPress={onPress}
             onLongPress={onLongPress}
             style={styles.tab}>
-            {route.name === 'Sounds'}
+            {route.name === 'Sounds' ? (
+              <View>
+                <Image
+                  style={{height: 30, width: 30}}
+                  source={
+                    !isFocused
+                      ? require('../../assets/icons/tabBarIcons/sound_default.png')
+                      : require('../../assets/icons/tabBarIcons/sound_focused.png')
+                  }
+                />
+              </View>
+            ) : (
+              <View>
+                <Image
+                  style={{height: 30, width: 30}}
+                  source={
+                    isFocused
+                      ? TabBarIcons[route.name.toLowerCase()].default
+                      : TabBarIcons[route.name.toLowerCase()].focused
+                  }
+                />
+              </View>
+            )}
 
             <Text
               style={[
