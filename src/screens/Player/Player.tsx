@@ -3,7 +3,11 @@ import {Image, Pressable, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {AppStackScreenProps} from '../../navigator/AppNavigator';
-import TrackPlayer, {RepeatMode} from 'react-native-track-player';
+import TrackPlayer, {
+  Event,
+  RepeatMode,
+  useTrackPlayerEvents,
+} from 'react-native-track-player';
 //assets
 import ChevronLeft from '../../assets/icons/ChevronLeft';
 //style
@@ -22,6 +26,10 @@ import ShuffleOn from '../../assets/icons/ShuffleOn';
 import data from '../CatalogScreen/data';
 import {useAppDispatch, useAppSelector} from '../../store';
 import {selectCurrentNote, setToggleState} from '../../store/ShowSlice';
+import {setRepeatMode} from '../../store/RepeatSlice';
+import {setupPlayer} from 'react-native-track-player/lib/trackPlayer';
+
+const events = [Event.PlaybackState, Event.PlaybackError];
 
 const MusicPlayer = ({route}: any) => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -29,18 +37,34 @@ const MusicPlayer = ({route}: any) => {
   const paddingStyle = {paddingTop: top + 15, paddingBottom: bottom + 15};
   const navigation = useNavigation<AppStackScreenProps['navigation']>();
   const [currentID, setCurrentID] = useState(route.params.currentID);
-  const [repeated, setRepeated] = useState<boolean>(false);
   const [items, setItems] = useState(route.params.data);
   const [shuffleItems, setShuffleItems] = useState<boolean>(false);
   const shuffleData = [...data[0], ...data[1], ...data[2]];
 
   const isLoading = useAppSelector(selectCurrentNote);
-  console.log('isLoading', isLoading);
   const dispatch = useAppDispatch();
+  const repeatMode = useAppSelector(state => state.repeatMode.repeatMode);
 
+  const [playerState, setPlayerState] = useState<string>('stopped');
+
+  useTrackPlayerEvents(events, event => {
+    if (event.type === Event.PlaybackError) {
+      console.warn('An error occured while playing the current track.');
+    }
+    if (event.type === Event.PlaybackState) {
+      if (
+        event.state === 'stopped' ||
+        event.state === 'playing' ||
+        event.state === 'ended'
+      ) {
+        setPlayerState(event.state);
+      }
+    }
+  });
+  console.log('playerState', playerState);
   useEffect(() => {
     function setup() {
-      TrackPlayer.setupPlayer();
+      console.log(TrackPlayer.setupPlayer());
     }
     setup();
   }, []);
@@ -57,8 +81,8 @@ const MusicPlayer = ({route}: any) => {
   };
 
   const removeTrack = () => {
-    navigation.goBack();
     TrackPlayer.reset();
+    navigation.goBack();
   };
 
   const skipTrack = () => {
@@ -88,12 +112,12 @@ const MusicPlayer = ({route}: any) => {
 
   const repeat = () => {
     TrackPlayer.setRepeatMode(RepeatMode.Track);
-    setRepeated(prev => !prev);
+    dispatch(setRepeatMode());
   };
 
   const offRepeat = () => {
     TrackPlayer.setRepeatMode(RepeatMode.Off);
-    setRepeated(prev => !prev);
+    dispatch(setRepeatMode());
   };
 
   let shuffled = shuffleData
@@ -148,10 +172,14 @@ const MusicPlayer = ({route}: any) => {
             <Pressable
               style={styles.play}
               onPress={isPlaying ? stopTrack : playSound}>
-              {isPlaying ? <Stop /> : <PlayIcon />}
+              {playerState == 'stopped' || playerState == 'ended' ? (
+                <PlayIcon />
+              ) : (
+                playerState == 'playing' && <Stop />
+              )}
             </Pressable>
-            <Pressable onPress={repeated ? offRepeat : repeat}>
-              {repeated ? <RepeatOn /> : <RepeatOff />}
+            <Pressable onPress={repeatMode ? offRepeat : repeat}>
+              {repeatMode ? <RepeatOn /> : <RepeatOff />}
             </Pressable>
           </View>
           <View style={styles.column3}>

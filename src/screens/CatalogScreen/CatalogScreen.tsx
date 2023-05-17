@@ -30,7 +30,7 @@ const CatalogScreen = ({route}: any) => {
               style={styles.item}
               key={index}
               onPress={() =>
-                navigation.navigate('TrackPlayer', {
+                navigation.navigate('MusicPlayer', {
                   currentID: index,
                   data: data,
                 })

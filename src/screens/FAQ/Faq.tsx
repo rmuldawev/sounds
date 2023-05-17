@@ -5,7 +5,7 @@ import TrackPlayer from 'react-native-track-player';
 import styles from './styles';
 import {Image} from 'react-native';
 
-const App = () => {
+const FAQ = () => {
   const {bottom, top} = useSafeAreaInsets();
   const paddingStyle = {paddingTop: top + 15, paddingBottom: bottom + 15};
   return (
@@ -48,4 +48,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default FAQ;

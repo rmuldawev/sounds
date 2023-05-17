@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:40,
   },
   title: {
     flexDirection: 'row',
@@ -41,8 +40,8 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    marginBottom:80
+    paddingHorizontal: 25,
+    marginBottom:10
   },
   image: {
     height: 350,

@@ -49,7 +49,7 @@ const Tabbar = ({state, navigation, descriptors}: any) => {
             onPress={onPress}
             onLongPress={onLongPress}
             style={styles.tab}>
-            {route.name === 'Sounds' ? (
+            {route.name === 'SoundsScreens' ? (
               <View>
                 <Image
                   style={{height: 30, width: 30}}

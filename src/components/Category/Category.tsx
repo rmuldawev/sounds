@@ -9,7 +9,6 @@ interface CategoryProps {
 }
 
 const Category: FC<CategoryProps> = ({albumImage, CategoryName}) => {
-  console.log(data, 'data');
   return (
     <View style={styles.container}>
       <Image style={styles.tiger} source={albumImage} />
