@@ -4,6 +4,7 @@ import {persistReducer, persistStore} from 'redux-persist';
 import ShowPictureSlice from './ShowSlice';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import trackPlayerSlice from './RepeatSlice';
+import ShuffleSlice from './ShuffleSlice';
 
 const persistConfig = {
   key: 'toggle',
@@ -15,6 +16,15 @@ const repeatModePersistConfig = {
   storage: AsyncStorage,
 };
 
+const shuffleModePersistConfig = {
+  key: 'shuffleMode',
+  storage: AsyncStorage,
+};
+
+const shuffleModeReducer = persistReducer(
+  shuffleModePersistConfig,
+  ShuffleSlice,
+);
 const persistedReducer = persistReducer(persistConfig, ShowPictureSlice);
 const repeaterReducer = persistReducer(
   repeatModePersistConfig,
@@ -25,6 +35,7 @@ export const store = configureStore({
   reducer: {
     toggle: persistedReducer,
     repeatMode: repeaterReducer,
+    shuffleMode: shuffleModeReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({serializableCheck: false}),

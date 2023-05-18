@@ -76,7 +76,7 @@ const Tabbar = ({state, navigation, descriptors}: any) => {
             <Text
               style={[
                 styles.TabBarTextStyle,
-                {color: isFocused ? 'orange' : 'black'},
+                {color: isFocused ? '#CC0000' : 'black'},
               ]}>
               {label}
             </Text>

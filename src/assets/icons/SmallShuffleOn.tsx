@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Svg, {SvgProps, Path} from 'react-native-svg';
-const ShuffleOn = (props: SvgProps) => (
+const SmallShuffleOn = (props: SvgProps) => (
   <Svg
     width={28}
-    height={28}
+    height={16}
     fill="none"
     stroke="#CC0000"
     strokeLinecap="round"
@@ -14,4 +14,4 @@ const ShuffleOn = (props: SvgProps) => (
     <Path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
   </Svg>
 );
-export default ShuffleOn;
+export default SmallShuffleOn;

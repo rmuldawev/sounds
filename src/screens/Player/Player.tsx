@@ -28,6 +28,8 @@ import {useAppDispatch, useAppSelector} from '../../store';
 import {selectCurrentNote, setToggleState} from '../../store/ShowSlice';
 import {setRepeatMode} from '../../store/RepeatSlice';
 import {setupPlayer} from 'react-native-track-player/lib/trackPlayer';
+import {setShuffleMode} from '../../store/ShuffleSlice';
+import ToggleImageActive from '../../assets/icons/toggleImageActive';
 
 const events = [Event.PlaybackState, Event.PlaybackError];
 
@@ -38,13 +40,12 @@ const MusicPlayer = ({route}: any) => {
   const navigation = useNavigation<AppStackScreenProps['navigation']>();
   const [currentID, setCurrentID] = useState(route.params.currentID);
   const [items, setItems] = useState(route.params.data);
-  const [shuffleItems, setShuffleItems] = useState<boolean>(false);
   const shuffleData = [...data[0], ...data[1], ...data[2]];
-
   const isLoading = useAppSelector(selectCurrentNote);
   const dispatch = useAppDispatch();
   const repeatMode = useAppSelector(state => state.repeatMode.repeatMode);
-
+  const shuffleMode = useAppSelector(state => state.shuffleMode.shuffleMode);
+  // const showMode = useAppSelector(state => state.toggle.)
   const [playerState, setPlayerState] = useState<string>('stopped');
 
   useTrackPlayerEvents(events, event => {
@@ -127,12 +128,15 @@ const MusicPlayer = ({route}: any) => {
 
   const onShuffle = () => {
     setItems(shuffled);
-    setShuffleItems(true);
+    dispatch(setShuffleMode());
+    // setShuffleItems(true);
   };
 
   const offShuffle = () => {
     setItems(route.params.data);
-    setShuffleItems(false);
+    dispatch(setShuffleMode());
+
+    // setShuffleItems(false);
   };
 
   return (
@@ -165,7 +169,7 @@ const MusicPlayer = ({route}: any) => {
               <SkipBack />
             </Pressable>
             <Pressable onPress={() => dispatch(setToggleState())}>
-              <ToggleImage />
+              {!isLoading ? <ToggleImage /> : <ToggleImageActive />}
             </Pressable>
           </View>
           <View style={styles.column2}>
@@ -186,8 +190,8 @@ const MusicPlayer = ({route}: any) => {
             <Pressable onPress={skipTrack}>
               <Skip />
             </Pressable>
-            <Pressable onPress={shuffleItems ? offShuffle : onShuffle}>
-              {shuffleItems ? <ShuffleOn /> : <ShuffleOff />}
+            <Pressable onPress={shuffleMode ? offShuffle : onShuffle}>
+              {shuffleMode ? <ShuffleOn /> : <ShuffleOff />}
             </Pressable>
           </View>
         </View>

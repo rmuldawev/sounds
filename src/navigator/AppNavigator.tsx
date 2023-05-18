@@ -25,17 +25,12 @@ export type AppStackScreenProps = NativeStackScreenProps<
   MainStackParamList,
   'Sounds'
 >;
-const SoundsScreens = () => {
-  <Tab.Navigator>
-    <Tab.Screen name="Sounds" component={Sounds} />
-  </Tab.Navigator>;
-};
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
   const noHeaderStyle = {headerShown: false};
-  const mode = useAppSelector(item => item.repeatMode.repeatMode);
+  const mode = useAppSelector(item => item.shuffleMode.shuffleMode);
   console.log('mode', mode);
   return (
     <NavigationContainer>

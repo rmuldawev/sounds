@@ -9,7 +9,7 @@ const TabBarIcons = {
   },
   settings: {
     focused: require('./assets/icons/tabBarIcons/settings_default.png'),
-    default: require('./assets/icons/tabBarIcons/settings_focused.png'),
+    default: require('./assets/icons/tabBarIcons/settings_focused2.png'),
   },
 };
 

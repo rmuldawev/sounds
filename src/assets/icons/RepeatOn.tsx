@@ -5,7 +5,7 @@ const RepeatOn = (props: SvgProps) => (
     width={28}
     height={28}
     fill="none"
-    stroke="yellow"
+    stroke="#CC0000"
     strokeLinecap="round"
     strokeLinejoin="round"
     strokeWidth={2}

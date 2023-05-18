@@ -8,26 +8,24 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    borderColor: 'rgba(87, 96, 123, 0.3)',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 5,
-    borderTopWidth: 1,
-    paddingHorizontal: 20,
+    paddingTop: 8,
+    paddingHorizontal: 22,
 
   },
   TabBarTextStyle: {
-    fontSize: 12,
-    marginTop: 3,
+    fontSize: 13,
+    marginTop: 1,
     letterSpacing: 0.16,
-    lineHeight: 13,
+    lineHeight: 15,
   },
   tab: {
     width: spaces.windowWidth / 5.25,
     alignItems: 'center',
-    height: 40,
-    // backgroundColor:'red'
+    // height: 50,
+    // backgroundColor:'red',
   },
 })
 
