@@ -1,12 +1,12 @@
 import {createReducer, createSlice} from '@reduxjs/toolkit';
 import React from 'react';
-import {RepeatMode} from 'react-native-track-player';
-import {setRepeatMode} from 'react-native-track-player/lib/trackPlayer';
 
 const initialState: {
   isLoading: boolean;
+  PinkTheme: boolean;
 } = {
   isLoading: false,
+  PinkTheme: false,
 };
 export const ShowPictureSlice = createSlice({
   name: 'showPicture',
@@ -15,9 +15,14 @@ export const ShowPictureSlice = createSlice({
     setToggleState: state => {
       state.isLoading = !state.isLoading;
     },
+    setBackgroundColor: state => {
+      state.PinkTheme = !state.PinkTheme;
+    },
   },
 });
 
-export const {setToggleState} = ShowPictureSlice.actions;
+export const {setToggleState, setBackgroundColor} = ShowPictureSlice.actions;
 export const selectCurrentNote = (state: RootState) => state.toggle.isLoading;
+export const selectBackgroundThemeColor = (state: RootState) =>
+  state.toggle.PinkTheme;
 export default ShowPictureSlice.reducer;

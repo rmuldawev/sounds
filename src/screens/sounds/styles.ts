@@ -7,6 +7,11 @@ const styles = StyleSheet.create({
         backgroundColor:'#a3ccf5',
         paddingHorizontal:12,
     },
+    containerTheme2: {
+        flexGrow:1,
+        backgroundColor:'#FF9999',
+        paddingHorizontal:12,
+    },
     animals:{
         flexDirection:'row',
         justifyContent:'space-between',

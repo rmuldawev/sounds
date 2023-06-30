@@ -7,6 +7,11 @@ const styles = StyleSheet.create({
           paddingHorizontal:15,
           flexGrow: 1 ,
     },
+    containerTheme2:{
+        backgroundColor: '#FF9999',
+          paddingHorizontal:15,
+          flexGrow: 1 ,
+    },
     item:{
         height:160,
         width:'48%',

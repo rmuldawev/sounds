@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#a3ccf5',
   },
+  mainTheme2: {
+    flex: 1,
+    backgroundColor: '#FF9999',
+  },
   container: {
     alignItems: 'center',
     paddingHorizontal: 20,

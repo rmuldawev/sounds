@@ -25,7 +25,11 @@ import ShuffleOff from '../../assets/icons/ShuffleOff';
 import ShuffleOn from '../../assets/icons/ShuffleOn';
 import data from '../CatalogScreen/data';
 import {useAppDispatch, useAppSelector} from '../../store';
-import {selectCurrentNote, setToggleState} from '../../store/ShowSlice';
+import {
+  selectBackgroundThemeColor,
+  selectCurrentNote,
+  setToggleState,
+} from '../../store/ShowSlice';
 import {setRepeatMode} from '../../store/RepeatSlice';
 import {setupPlayer} from 'react-native-track-player/lib/trackPlayer';
 import {setShuffleMode} from '../../store/ShuffleSlice';
@@ -34,6 +38,7 @@ import ToggleImageActive from '../../assets/icons/toggleImageActive';
 const events = [Event.PlaybackState, Event.PlaybackError];
 
 const MusicPlayer = ({route}: any) => {
+  const pinkTheme = useAppSelector(selectBackgroundThemeColor);
   const [isPlaying, setIsPlaying] = useState(false);
   const {bottom, top} = useSafeAreaInsets();
   const paddingStyle = {paddingTop: top + 15, paddingBottom: bottom + 15};
@@ -45,7 +50,6 @@ const MusicPlayer = ({route}: any) => {
   const dispatch = useAppDispatch();
   const repeatMode = useAppSelector(state => state.repeatMode.repeatMode);
   const shuffleMode = useAppSelector(state => state.shuffleMode.shuffleMode);
-  // const showMode = useAppSelector(state => state.toggle.)
   const [playerState, setPlayerState] = useState<string>('stopped');
 
   useTrackPlayerEvents(events, event => {
@@ -65,7 +69,7 @@ const MusicPlayer = ({route}: any) => {
   console.log('playerState', playerState);
   useEffect(() => {
     function setup() {
-      console.log(TrackPlayer.setupPlayer());
+      TrackPlayer.setupPlayer();
     }
     setup();
   }, []);
@@ -140,7 +144,12 @@ const MusicPlayer = ({route}: any) => {
   };
 
   return (
-    <View style={[paddingStyle, styles.main]}>
+    <View
+      style={
+        pinkTheme
+          ? [paddingStyle, styles.mainTheme2]
+          : [paddingStyle, styles.main]
+      }>
       <Pressable style={styles.title} onPress={removeTrack}>
         <ChevronLeft />
         <Text style={styles.textTitle}>Назад</Text>

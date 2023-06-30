@@ -117,7 +117,6 @@ const data = [
       url: require('../../assets/sounds/inStreetSounds/policeSound.mp3'),
       name: 'Скорая помощь',
       title: 'На улице',
-
     },
     {
       id: 17,

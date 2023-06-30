@@ -4,17 +4,25 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import TrackPlayer from 'react-native-track-player';
 import styles from './styles';
 import {Image} from 'react-native';
+import {useAppSelector} from '../../store';
+import {selectBackgroundThemeColor} from '../../store/ShowSlice';
+import LogoSounds from '../../assets/icons/LogoSounds';
 
 const FAQ = () => {
   const {bottom, top} = useSafeAreaInsets();
   const paddingStyle = {paddingTop: top + 15, paddingBottom: bottom + 15};
+  const pinkTheme = useAppSelector(selectBackgroundThemeColor);
+
   return (
-    <View style={[paddingStyle, styles.container]}>
-      <View>
-        <Image
-          style={styles.logo}
-          source={require('../../assets/images/LogoSounds.png')}
-        />
+    <View
+      style={
+        pinkTheme
+          ? [paddingStyle, styles.containerTheme2]
+          : [paddingStyle, styles.container]
+      }>
+      <View style={styles.logo}>
+        <LogoSounds />
+        <Text style={styles.logoText}>Звуки для детей</Text>
       </View>
       <View style={styles.main}>
         <Text style={styles.faq}>FAQ</Text>

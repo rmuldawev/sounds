@@ -8,6 +8,13 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:'space-between'
     },
+
+    containerTheme2:{
+        paddingHorizontal:12,
+        backgroundColor:'#FF9999',
+        flex:1,
+        justifyContent:'space-between'
+    },
     text1:{
         // backgroundColor:'red'
     },
@@ -29,10 +36,13 @@ const styles = StyleSheet.create({
         backgroundColor:'#ffffff'
     },
     logo:{
-        height:150,
-        width:350,
-        alignSelf:'center',
-        marginTop:25
+        alignItems:'center',
+    },
+    logoText: {
+        fontSize:25,
+        fontWeight:'600',
+        color:'#ffffff',
+        marginBottom:20
     },
     mainText:{
         color:'#0099CC',

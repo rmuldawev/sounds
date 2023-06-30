@@ -3,7 +3,12 @@ import {Switch, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import styles from '../Settings/styles';
 import {useAppDispatch, useAppSelector} from '../../store';
-import {selectCurrentNote, setToggleState} from '../../store/ShowSlice';
+import {
+  selectBackgroundThemeColor,
+  selectCurrentNote,
+  setBackgroundColor,
+  setToggleState,
+} from '../../store/ShowSlice';
 import {setRepeatMode} from '../../store/RepeatSlice';
 import {setShuffleMode} from '../../store/ShuffleSlice';
 import SmallToggleImageActive from '../../assets/icons/smallToggleImageActive';
@@ -17,6 +22,8 @@ const Settings = () => {
   const isLoading = useAppSelector(selectCurrentNote);
   const isRepeated = useAppSelector(item => item.repeatMode.repeatMode);
   const shuffleMode = useAppSelector(item => item.shuffleMode.shuffleMode);
+  const pinkTheme = useAppSelector(selectBackgroundThemeColor);
+  console.log('pinkTheme', pinkTheme);
   const dispatch = useAppDispatch();
 
   const toggleSwitch = () => {
@@ -31,8 +38,17 @@ const Settings = () => {
     dispatch(setShuffleMode());
   };
 
+  const toggleBackgroundThemeColor = () => {
+    dispatch(setBackgroundColor());
+  };
+
   return (
-    <View style={[styles.container, paddingStyle]}>
+    <View
+      style={
+        pinkTheme
+          ? [styles.containerTheme2, paddingStyle]
+          : [styles.container, paddingStyle]
+      }>
       <Text style={styles.header}>Настройки:</Text>
       <View style={styles.switch}>
         <View style={styles.image}>
@@ -72,6 +88,19 @@ const Settings = () => {
           value={shuffleMode}
           ios_backgroundColor="#ffffff"
           onValueChange={toggleShuffleMode}
+        />
+      </View>
+      <View style={styles.switch}>
+        <View style={styles.image}>
+          <SmallShuffleOn />
+          <Text>Сменить цвет</Text>
+        </View>
+        <Switch
+          trackColor={{false: '#CC0000', true: '#CC0000'}}
+          thumbColor={'#fffffff'}
+          value={pinkTheme}
+          ios_backgroundColor="#ffffff"
+          onValueChange={toggleBackgroundThemeColor}
         />
       </View>
       <View style={styles.mail}>
